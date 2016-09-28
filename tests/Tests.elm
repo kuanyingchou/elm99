@@ -30,7 +30,19 @@ all =
       , makeEqualTest (elementAt [0..5] 6) (Nothing)
       , makeEqualTest (elementAt [0..5] -1) (Nothing)
       ]
-
+    , makeTestSuit
+      [ makeEqualTest (length [0..5]) 6
+      , makeEqualTest (length []) 0
+      ]
+    , makeTestSuit
+      [ makeEqualTest (palindrome [1,2,3,2,1]) True
+      , makeEqualTest (palindrome [1]) True
+      , makeEqualTest (palindrome [1, 1]) True
+      , makeEqualTest (palindrome [1, 2, 1]) True
+      , makeEqualTest (palindrome [1, 2, 2]) False
+      , makeEqualTest (palindrome [2, 2, 1]) False
+      , makeEqualTest (palindrome [1..5]) False
+      ]
     ]
 
 
@@ -53,6 +65,6 @@ makeEqualNotEqualTest op actual expect =
 
 makeTestSuit : List Test -> Test
 makeTestSuit tests =
-    describe "test group" tests
+  describe "test group" tests
 
 
