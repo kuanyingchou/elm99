@@ -68,6 +68,62 @@ dropWhile predicate list =
         list
 
 
+takeWhile : (a->Bool) -> List a -> List a
+takeWhile predicate list = 
+  case list of
+    [] -> 
+      list
+    (x::xs) -> 
+      if predicate x then
+        x :: takeWhile predicate xs
+      else 
+        []
+
+
+noDupes : List a -> List a
+noDupes list =
+  case list of
+    [] -> 
+      []
+
+    [x] -> 
+      [x]
+
+    x::y::rest -> 
+      if x == y then
+        noDupes (y::rest)
+      else 
+        x :: (noDupes (y::rest))
+
+
+pack : List a -> List (List a)
+pack list =
+  case list of
+
+    [] -> 
+      []
+
+    otherwise ->
+      let 
+        separate first rest = 
+          case rest of
+            [] -> 
+              (first, [])
+
+            x::xs -> 
+              case first of
+                [] -> 
+                  separate [x] xs
+
+                y::ys ->
+                  if x == y then
+                    separate (y::first) xs
+                  else 
+                    (first, rest)
+        (first, rest) = separate [] list
+      in
+        first :: pack rest
+
   
 -- util
 

@@ -48,6 +48,22 @@ all =
       , makeEqualTest (dropWhile (\x -> x < 0) [1..5]) [1..5]
       , makeEqualTest (dropWhile (\x -> x < 6) [1..5]) []
       ]
+    , makeTestSuit
+      [ makeEqualTest (takeWhile (\x -> x < 3) [1..5]) [1..2]
+      , makeEqualTest (takeWhile (\x -> x < 0) [1..5]) []
+      , makeEqualTest (takeWhile (\x -> x < 6) [1..5]) [1..5]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (noDupes [1,1,2,3,3,4,5,5]) [1..5]
+      , makeEqualTest (noDupes [1..5]) [1..5]
+      , makeEqualTest (noDupes []) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (pack [1,1,1,2,2,3,4,4]) [[1,1,1], [2,2], [3], [4,4]]
+      , makeEqualTest (pack [1]) [[1]]
+      , makeEqualTest (pack []) []
+      , makeEqualTest (pack [1,1,1,1]) [[1,1,1,1]]
+      ]
     ]
 
 
