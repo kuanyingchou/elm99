@@ -11,18 +11,18 @@ all =
     [ makeTestSuit 
       [ makeEqualTest (myLast [1..5]) (Just 5) 
       , makeEqualTest (myLast [1]) (Just 1) 
-      , makeEqualTest (myLast []) Nothing
+      , makeEqualTest (myLast []) (Nothing)
       ]
     , makeTestSuit
       [ makeEqualTest (penultimate [1..5]) (Just 4)
-      , makeEqualTest (penultimate [1]) Nothing
-      , makeEqualTest (penultimate []) Nothing
+      , makeEqualTest (penultimate [1]) (Nothing)
+      , makeEqualTest (penultimate []) (Nothing)
       , makeEqualTest (penultimate (String.toList "hello")) (Just 'l')
       ]
     , makeTestSuit
       [ makeEqualTest (penultimate' [1..5]) (Just 4)
-      , makeEqualTest (penultimate' [1]) Nothing
-      , makeEqualTest (penultimate' []) Nothing
+      , makeEqualTest (penultimate' [1]) (Nothing)
+      , makeEqualTest (penultimate' []) (Nothing)
       , makeEqualTest (penultimate' (String.toList "hello")) (Just 'l')
       ]
     , makeTestSuit
