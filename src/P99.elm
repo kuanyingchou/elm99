@@ -54,6 +54,20 @@ palindrome list =
     r = myReverse list
   in 
     list == r
+
+
+dropWhile : (a->Bool) -> List a -> List a
+dropWhile predicate list =
+  case list of
+    [] -> 
+      list
+    (x::xs) -> 
+      if predicate x then
+        dropWhile predicate xs
+      else 
+        list
+
+
   
 -- util
 

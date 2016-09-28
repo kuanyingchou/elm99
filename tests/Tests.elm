@@ -43,6 +43,11 @@ all =
       , makeEqualTest (palindrome [2, 2, 1]) False
       , makeEqualTest (palindrome [1..5]) False
       ]
+    , makeTestSuit
+      [ makeEqualTest (dropWhile (\x -> x < 3) [1..5]) [3..5]
+      , makeEqualTest (dropWhile (\x -> x < 0) [1..5]) [1..5]
+      , makeEqualTest (dropWhile (\x -> x < 6) [1..5]) []
+      ]
     ]
 
 
