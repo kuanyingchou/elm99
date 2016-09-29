@@ -124,6 +124,25 @@ pack list =
       in
         first :: pack rest
 
+
+runLengths : List (List a) -> List (Int, a)
+runLengths list =
+  let 
+    convert list = 
+      case list of
+        [] -> 
+          Debug.crash "should not be empty"
+
+        x::xs ->
+          (myLength list, x)
+
+    filter list =
+      case list of
+        [] -> False
+        x::xs -> True
+  in 
+    myMap convert (myFilter filter list)
+
   
 -- util
 
@@ -168,4 +187,32 @@ myFoldr fn init list =
     case r of
       [] -> init
       (x::xs) -> myFoldr fn (fn x init) xs 
+
+
+myMap : (a -> b) -> List a -> List b
+myMap func xs =
+  case xs of
+    [] -> []
+    x::xs -> 
+      func x :: myMap func xs 
+  
+myLength : List a -> Int
+myLength list =
+  case list of
+    [] -> 0
+    x::xs -> 1 + myLength xs
+
+myFilter : (a -> Bool) -> List a -> List a
+myFilter predicate list =
+  case list of
+    [] -> 
+      []
+    x::xs -> 
+      let 
+        rest = myFilter predicate xs
+      in 
+        if predicate x then
+          x :: rest
+        else
+          rest
 

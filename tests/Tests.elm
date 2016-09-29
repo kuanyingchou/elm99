@@ -64,6 +64,14 @@ all =
       , makeEqualTest (pack []) []
       , makeEqualTest (pack [1,1,1,1]) [[1,1,1,1]]
       ]
+    , makeTestSuit
+      [ makeEqualTest (runLengths [['a','a','a'],  ['b']]) 
+        [(3,'a'), (1,'b')]
+      , makeEqualTest (runLengths []) []
+      , makeEqualTest (runLengths [[]]) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (myMap (\x -> x + 1) [1..5])  [2..6]]
     ]
 
 
