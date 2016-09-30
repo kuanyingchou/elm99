@@ -48,6 +48,35 @@ all =
       , makeEqualTest (palindrome [2, 2, 1]) False
       , makeEqualTest (palindrome [1..5]) False
       ]
+    , makeTestSuit
+      [ makeEqualTest (dropWhile (\x -> x < 3) [1..5]) [3..5]
+      , makeEqualTest (dropWhile (\x -> x < 0) [1..5]) [1..5]
+      , makeEqualTest (dropWhile (\x -> x < 6) [1..5]) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (takeWhile (\x -> x < 3) [1..5]) [1..2]
+      , makeEqualTest (takeWhile (\x -> x < 0) [1..5]) []
+      , makeEqualTest (takeWhile (\x -> x < 6) [1..5]) [1..5]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (noDupes [1,1,2,3,3,4,5,5]) [1..5]
+      , makeEqualTest (noDupes [1..5]) [1..5]
+      , makeEqualTest (noDupes []) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (pack [1,1,1,2,2,3,4,4]) [[1,1,1], [2,2], [3], [4,4]]
+      , makeEqualTest (pack [1]) [[1]]
+      , makeEqualTest (pack []) []
+      , makeEqualTest (pack [1,1,1,1]) [[1,1,1,1]]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (runLengths [['a','a','a'],  ['b']]) 
+        [(3,'a'), (1,'b')]
+      , makeEqualTest (runLengths []) []
+      , makeEqualTest (runLengths [[]]) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (myMap (\x -> x + 1) [1..5])  [2..6]]
     -- , makeTestSuit
     --   [ makeEqualTest (rleEncode [1,2,3,2,1]) True
     --   ]

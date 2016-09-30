@@ -54,6 +54,95 @@ palindrome list =
     r = myReverse list
   in 
     list == r
+
+
+dropWhile : (a->Bool) -> List a -> List a
+dropWhile predicate list =
+  case list of
+    [] -> 
+      list
+    (x::xs) -> 
+      if predicate x then
+        dropWhile predicate xs
+      else 
+        list
+
+
+takeWhile : (a->Bool) -> List a -> List a
+takeWhile predicate list = 
+  case list of
+    [] -> 
+      list
+    (x::xs) -> 
+      if predicate x then
+        x :: takeWhile predicate xs
+      else 
+        []
+
+
+noDupes : List a -> List a
+noDupes list =
+  case list of
+    [] -> 
+      []
+
+    [x] -> 
+      [x]
+
+    x::y::rest -> 
+      if x == y then
+        noDupes (y::rest)
+      else 
+        x :: (noDupes (y::rest))
+
+
+pack : List a -> List (List a)
+pack list =
+  case list of
+
+    [] -> 
+      []
+
+    otherwise ->
+      let 
+        separate first rest = 
+          case rest of
+            [] -> 
+              (first, [])
+
+            x::xs -> 
+              case first of
+                [] -> 
+                  separate [x] xs
+
+                y::ys ->
+                  if x == y then
+                    separate (y::first) xs
+                  else 
+                    (first, rest)
+        (first, rest) = separate [] list
+      in
+        first :: pack rest
+
+
+runLengths : List (List a) -> List (Int, a)
+runLengths list =
+  let 
+    convert list = 
+      case list of
+        [] -> 
+          Debug.crash "should not be empty"
+
+        x::xs ->
+          (myLength list, x)
+
+    filter list =
+      case list of
+        [] -> False
+        x::xs -> True
+  in 
+    myMap convert (myFilter filter list)
+
   
 -- util
 
@@ -98,4 +187,32 @@ myFoldr fn init list =
     case r of
       [] -> init
       (x::xs) -> myFoldr fn (fn x init) xs 
+
+
+myMap : (a -> b) -> List a -> List b
+myMap func xs =
+  case xs of
+    [] -> []
+    x::xs -> 
+      func x :: myMap func xs 
+  
+myLength : List a -> Int
+myLength list =
+  case list of
+    [] -> 0
+    x::xs -> 1 + myLength xs
+
+myFilter : (a -> Bool) -> List a -> List a
+myFilter predicate list =
+  case list of
+    [] -> 
+      []
+    x::xs -> 
+      let 
+        rest = myFilter predicate xs
+      in 
+        if predicate x then
+          x :: rest
+        else
+          rest
 
