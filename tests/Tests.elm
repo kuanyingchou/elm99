@@ -35,6 +35,11 @@ all =
       , makeEqualTest (length []) 0
       ]
     , makeTestSuit
+      [ makeEqualTest (myReverse [1..4]) [4,3,2,1]
+      , makeEqualTest (myReverse [1]) [1]
+      , makeEqualTest (myReverse []) []
+      ]
+    , makeTestSuit
       [ makeEqualTest (palindrome [1,2,3,2,1]) True
       , makeEqualTest (palindrome [1]) True
       , makeEqualTest (palindrome [1, 1]) True
@@ -43,6 +48,9 @@ all =
       , makeEqualTest (palindrome [2, 2, 1]) False
       , makeEqualTest (palindrome [1..5]) False
       ]
+    -- , makeTestSuit
+    --   [ makeEqualTest (rleEncode [1,2,3,2,1]) True
+    --   ]
     ]
 
 
