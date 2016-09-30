@@ -96,6 +96,7 @@ noDupes list =
         x :: (noDupes (y::rest))
 
 
+-- !!!
 pack : List a -> List (List a)
 pack list =
   case list of
@@ -142,6 +143,40 @@ runLengths list =
         x::xs -> True
   in 
     myMap convert (myFilter filter list)
+
+
+type RleCode a = Run Int a | Single a
+
+rleEncode : List a -> List (RleCode a)
+rleEncode list =
+  case list of
+    [] ->
+      []
+    [x] -> 
+      [ Single x ]
+    x::xs ->
+      rleEncodeHelper [] (Single x) xs |> myReverse
+
+rleEncodeHelper : List (RleCode a) -> RleCode a -> List a -> List (RleCode a)
+rleEncodeHelper fixed first rest = 
+  let 
+    (c, e) =
+      case first of
+        Single x ->
+          (1, x)
+        Run count x ->
+          (count, x)
+  in
+    case rest of
+      [] -> 
+        first :: fixed
+
+      x :: xs ->
+        if x == e then
+          rleEncodeHelper fixed (Run (c+1) e) xs
+        else
+          rleEncodeHelper (first :: fixed) (Single x) xs
+           
 
   
 -- util

@@ -77,9 +77,13 @@ all =
       ]
     , makeTestSuit
       [ makeEqualTest (myMap (\x -> x + 1) [1..5])  [2..6]]
-    -- , makeTestSuit
-    --   [ makeEqualTest (rleEncode [1,2,3,2,1]) True
-    --   ]
+
+    , makeTestSuit
+      [ makeEqualTest (rleEncode [1,1,1,2,2,3,4,4]) [ Run 3 1, Run 2 2, Single 3, Run 2 4 ] 
+      , makeEqualTest (rleEncode [1,1,1,1,1]) [ Run 5 1 ] 
+      , makeEqualTest (rleEncode [1]) [ Single 1 ] 
+      , makeEqualTest (rleEncode ['a']) [ Single 'a' ] 
+      ]
     ]
 
 
