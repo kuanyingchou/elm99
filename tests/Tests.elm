@@ -105,6 +105,18 @@ all =
       , makeEqualTest (dropNth [1..10] 1) []
       , makeEqualTest (dropNth [1..10] 11) [1..10]
       ]
+    , makeTestSuit
+      [ makeEqualTest (split [1..10] 3) ([1..3], [4..10])
+      , makeEqualTest (split [1..5] 0) ([], [1, 2, 3, 4, 5])
+      , makeEqualTest (split [1..5] 2) ([1, 2], [3, 4, 5]) 
+      , makeEqualTest (split [1..5] 3) ([1, 2, 3], [4, 5])
+      , makeEqualTest (split [1..5] 4) ([1, 2, 3, 4], [5]) 
+      , makeEqualTest (split [1..5] 5) ([1, 2, 3, 4, 5], []) 
+      , makeEqualTest (split [1..5] 6) ([1, 2, 3, 4, 5], [])
+      , makeEqualTest (split [1..5] (-1)) ([], [1, 2, 3, 4, 5]) 
+      , makeEqualTest (split [ "aab", "b", "c", "aa" ] 2)  
+          ([ "aab", "b"],["c", "aa" ])
+      ]
     ]
 
 

@@ -229,7 +229,6 @@ dropNth list n =
   in 
     dropNthHelper list 1 n
 
--- util
 
 myReverse : List a -> List a
 myReverse list =
@@ -307,4 +306,22 @@ myRepeat count x =
     []
   else 
     x :: myRepeat (count-1) x
+
+split : List a -> Int -> (List a, List a)
+split list count =
+  let 
+    splitHelper list count pre =
+      case list of
+        [] ->
+          (pre, [])
+        x::xs ->
+          if count > 0 then
+            splitHelper xs (count-1) (x::pre)
+          else 
+            (pre, list)
+
+    (left, right) = splitHelper list count []
+  in 
+    (myReverse left, right)
+
 
