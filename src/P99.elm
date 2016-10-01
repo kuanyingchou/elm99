@@ -178,6 +178,26 @@ rleEncodeHelper fixed first rest =
           rleEncodeHelper (first :: fixed) (Single x) xs
            
 
+rleDecode : List (RleCode a) -> List a 
+rleDecode list = 
+  case list of
+    [] ->
+      []
+
+    x::xs ->
+      case x of
+        Single x ->
+          x :: rleDecode xs
+        Run count value ->
+          -- (myRepeat count value) ++ (rleDecode xs)
+          if count == 1 then
+            value :: (rleDecode xs)
+          else 
+            if count == 2 then
+              value :: rleDecode ((Single value) :: xs)
+            else
+              value :: rleDecode ((Run (count-1) value) :: xs)
+
   
 -- util
 
@@ -250,4 +270,11 @@ myFilter predicate list =
           x :: rest
         else
           rest
+
+myRepeat : Int -> a -> List a
+myRepeat count x =
+  if count == 0 then
+    []
+  else 
+    x :: myRepeat (count-1) x
 

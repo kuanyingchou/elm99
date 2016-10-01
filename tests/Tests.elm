@@ -84,6 +84,12 @@ all =
       , makeEqualTest (rleEncode [1]) [ Single 1 ] 
       , makeEqualTest (rleEncode ['a']) [ Single 'a' ] 
       ]
+    , makeTestSuit
+      [ makeEqualTest (rleDecode [ Run 3 1, Run 2 2, Single 3, Run 2 4 ]) [1,1,1,2,2,3,4,4] 
+      , makeEqualTest (rleDecode [ Run 5 1 ]) [1,1,1,1,1]  
+      , makeEqualTest (rleDecode [ Single 1 ]) [1]
+      , makeEqualTest (rleDecode [ Single 'a' ]) ['a']
+      ]
     ]
 
 
