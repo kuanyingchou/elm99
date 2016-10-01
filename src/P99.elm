@@ -198,7 +198,37 @@ rleDecode list =
             else
               value :: rleDecode ((Run (count-1) value) :: xs)
 
+duplicate : List a -> List a
+duplicate list =
+  case list of
+    [] ->
+      []
+    x::xs ->
+      x :: x :: duplicate xs
   
+repeatElements : Int -> List a -> List a
+repeatElements count list =
+  case list of
+    [] ->
+      []
+    x :: xs ->
+      myRepeat count x ++ repeatElements count xs
+
+dropNth : List a -> Int -> List a
+dropNth list n =
+  let 
+    dropNthHelper list m n =
+      case list of
+        [] ->
+          []
+        x :: xs ->
+          if m % n == 0 then
+            dropNthHelper xs (m+1) n
+          else
+            x :: dropNthHelper xs (m+1) n
+  in 
+    dropNthHelper list 1 n
+
 -- util
 
 myReverse : List a -> List a

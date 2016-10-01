@@ -90,6 +90,21 @@ all =
       , makeEqualTest (rleDecode [ Single 1 ]) [1]
       , makeEqualTest (rleDecode [ Single 'a' ]) ['a']
       ]
+    , makeTestSuit
+      [ makeEqualTest (duplicate [1,2,3,5,8,8]) [1,1,2,2,3,3,5,5,8,8,8,8]
+      , makeEqualTest (duplicate ['a', 'b']) ['a','a','b','b']
+      , makeEqualTest (duplicate []) []
+      ]
+    , makeTestSuit
+      [ makeEqualTest (repeatElements 3 [1,2]) [1,1,1,2,2,2]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (dropNth [1..10] 3) [1,2,4,5,7,8,10]
+      , makeEqualTest (dropNth [1,1,2,3,3,3] 2) [1,2,3]
+      , makeEqualTest (dropNth [] 2) []
+      , makeEqualTest (dropNth [1..10] 1) []
+      , makeEqualTest (dropNth [1..10] 11) [1..10]
+      ]
     ]
 
 
