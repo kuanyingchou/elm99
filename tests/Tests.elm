@@ -117,6 +117,20 @@ all =
       , makeEqualTest (split [ "aab", "b", "c", "aa" ] 2)  
           ([ "aab", "b"],["c", "aa" ])
       ]
+    , makeTestSuit
+      [ makeEqualTest (myTake 3 [1..10]) [1..3]
+      , makeEqualTest (myTake 0 [1..10]) []
+      , makeEqualTest (myTake -1 [1..10]) []
+      , makeEqualTest (myTake 11 [1..10]) [1..10]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (slice 3 7 [1..10]) [3..7]
+      , makeEqualTest (slice 2 100 [ 'a', 'b', 'c' ]) [ 'b', 'c' ]
+      , makeEqualTest (slice -1 2 [0..100]) [0, 1]
+      , makeEqualTest (slice -3 -2 [-3, -2, -1, 0, 1, 2, 3]) []
+      , makeEqualTest (slice 5 3 [ "indices", " are", "inverted"]) []
+      , makeEqualTest (slice 0 1 [0..10]) [0]
+      ]
     ]
 
 

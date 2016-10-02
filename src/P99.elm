@@ -324,4 +324,34 @@ split list count =
   in 
     (myReverse left, right)
 
+slice : Int -> Int -> List a -> List a
+slice from to list =
+  let 
+    toDrop = 
+      if from <= 0 then
+        0
+      else 
+        from - 1
+    toTake = 
+      if to <= 0 then
+        0
+      else 
+        to - toDrop
+  in
+    list |> myDrop toDrop |> myTake toTake
 
+myTake : Int -> List a -> List a
+myTake toTake list =
+  let 
+    helper toTake taken list =
+      case list of
+        [] ->
+          taken
+        x :: xs ->
+          if toTake > 0 then
+            helper (toTake-1) (x :: taken) xs
+          else 
+            taken
+
+  in 
+     (helper toTake [] list) |> myReverse
