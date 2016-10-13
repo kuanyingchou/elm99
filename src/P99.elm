@@ -355,3 +355,18 @@ myTake toTake list =
 
   in 
      (helper toTake [] list) |> myReverse
+
+-- 1 2 3 4 5
+-- 2 3 4 5 1 
+-- 3 4 5 1 2
+rotate : Int -> List a -> List a
+rotate count list =
+  let 
+    len = length list
+    c = (abs count) % len
+  in
+    if count >= 0 then -- go left
+      myDrop c list ++ myTake c list
+    else -- go right
+      myDrop (len-c) list ++ myTake (len-c) list
+

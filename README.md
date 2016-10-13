@@ -1,0 +1,1 @@
+run `elm-test`

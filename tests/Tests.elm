@@ -131,6 +131,16 @@ all =
       , makeEqualTest (slice 5 3 [ "indices", " are", "inverted"]) []
       , makeEqualTest (slice 0 1 [0..10]) [0]
       ]
+    , makeTestSuit
+      [ makeEqualTest (rotate 3 [ 1, 2, 5, 5, 2, 1 ]) [ 5, 2, 1, 1, 2, 5 ]
+      , makeEqualTest (rotate 13 [ 1..10 ]) [ 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 ]
+      , makeEqualTest (rotate 1 [1..5]) [ 2, 3, 4, 5, 1 ] -- rotate left
+      , makeEqualTest (rotate 0 [1..5]) [ 1, 2, 3, 4, 5 ]
+      , makeEqualTest (rotate -1 [1..5]) [ 5, 1, 2, 3, 4 ] -- rotate right
+      , makeEqualTest (rotate -6 [1..5]) [ 5, 1, 2, 3, 4 ]
+      , makeEqualTest (rotate 3 [1..5]) [ 4, 5, 1, 2, 3 ]
+      , makeEqualTest (rotate 1 [ "1", "2", "3", "4" ]) [ "2", "3", "4", "1" ]
+      ]
     ]
 
 
