@@ -370,3 +370,17 @@ rotate count list =
     else -- go right
       myDrop (len-c) list ++ myTake (len-c) list
 
+
+dropAt : Int -> List a -> List a
+dropAt index list =
+  if index < 0 then
+    list
+  else 
+    (myTake (index-1) list) ++ (myDrop index list)
+
+
+insertAt : Int -> a -> List a -> List a
+insertAt index element list =
+  myTake (index-1) list ++ [element] ++ myDrop (index-1) list
+
+

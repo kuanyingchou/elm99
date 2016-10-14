@@ -141,6 +141,24 @@ all =
       , makeEqualTest (rotate 3 [1..5]) [ 4, 5, 1, 2, 3 ]
       , makeEqualTest (rotate 1 [ "1", "2", "3", "4" ]) [ "2", "3", "4", "1" ]
       ]
+    , makeTestSuit
+      [ makeEqualTest (dropAt 2 [ 1, 2, 5, 5, 2, 1 ]) [ 1, 5, 5, 2, 1 ]
+      , makeEqualTest (dropAt 3 [1..14]) [ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+      , makeEqualTest (dropAt 6 [1..5]) [ 1, 2, 3, 4, 5 ]
+      , makeEqualTest (dropAt 0 [1..5]) [ 1, 2, 3, 4, 5 ]
+      , makeEqualTest (dropAt -1 [1..5]) [ 1, 2, 3, 4, 5 ]
+      , makeEqualTest (dropAt 1 [1..5]) [ 2, 3, 4, 5 ]
+      , makeEqualTest (dropAt 2 [ "1", "2", "3", "4", "5" ]) [ "1", "3", "4", "5" ]
+      ]
+    , makeTestSuit
+      [ makeEqualTest (insertAt 2 99 [ 1, 2, 5, 5, 2, 1 ]) [ 1, 99, 2, 5, 5, 2, 1 ]
+      , makeEqualTest (insertAt 3 99 [1..14]) [ 1, 2, 99, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+      , makeEqualTest (insertAt 6 99 [1..5]) [ 1, 2, 3, 4, 5, 99 ]
+      , makeEqualTest (insertAt 0 99 [1..5]) [ 99, 1, 2, 3, 4, 5 ]
+      , makeEqualTest (insertAt -1 99 [1..5]) [ 99, 1, 2, 3, 4, 5 ]
+      , makeEqualTest (insertAt 1 99 [1..5]) [ 99, 1, 2, 3, 4, 5 ]
+      , makeEqualTest (insertAt 2 "x" [ "1", "2", "3", "4", "5" ]) [ "1", "x", "2", "3", "4", "5" ]
+      ]
     ]
 
 
