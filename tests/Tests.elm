@@ -159,6 +159,14 @@ all =
       , makeEqualTest (insertAt 1 99 [1..5]) [ 99, 1, 2, 3, 4, 5 ]
       , makeEqualTest (insertAt 2 "x" [ "1", "2", "3", "4", "5" ]) [ "1", "x", "2", "3", "4", "5" ]
       ]
+    , makeTestSuit
+      [ makeEqualTest (range 1 5) [1..5]
+      , makeEqualTest (range 0 5) [0..5]
+      , makeEqualTest (range -1 5) [-1..5]
+      , makeEqualTest (range 5 -1) [ 5, 4, 3, 2, 1, 0, -1 ]
+      , makeEqualTest (range 5 5) [ 5 ]
+      , makeEqualTest (List.length (range 1 999)) 999
+      ]
     ]
 
 

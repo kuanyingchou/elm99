@@ -383,4 +383,11 @@ insertAt : Int -> a -> List a -> List a
 insertAt index element list =
   myTake (index-1) list ++ [element] ++ myDrop (index-1) list
 
+range : Int -> Int -> List Int
+range begin end =
+  if begin < end then
+    [begin..end]
+  else 
+    myReverse [end..begin]
+
 
