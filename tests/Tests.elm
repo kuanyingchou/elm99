@@ -167,6 +167,14 @@ all =
       , makeEqualTest (range 5 5) [ 5 ]
       , makeEqualTest (List.length (range 1 999)) 999
       ]
+    , makeTestSuit
+      [ makeEqualTest (range' 1 5) [1..5]
+      , makeEqualTest (range' 0 5) [0..5]
+      , makeEqualTest (range' -1 5) [-1..5]
+      , makeEqualTest (range' 5 -1) [ 5, 4, 3, 2, 1, 0, -1 ]
+      , makeEqualTest (range' 5 5) [ 5 ]
+      , makeEqualTest (List.length (range' 1 999)) 999
+      ]
     ]
 
 

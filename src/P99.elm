@@ -390,4 +390,14 @@ range begin end =
   else 
     myReverse [end..begin]
 
+range' : Int -> Int -> List Int
+range' begin end =
+  if begin < end then
+    begin :: range' (begin+1) end
+  else if begin > end then
+    begin :: range' (begin-1) end
+  else
+    [begin]
+
+
 
